@@ -1,0 +1,35 @@
+version: '2'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.3
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_mediawiki
+      - MARIADB_DATABASE=bitnami_mediawiki
+    volumes:
+      - ./mariadb-data:/bitnami/mariadb
+        #      - 'mariadb_data:/bitnami/mariadb'
+  mediawiki2:
+    image: docker.io/bitnami/mediawiki:1.35.1-custom
+    build: .
+    container_name: wiki
+    ports:
+      - '8080:8080'
+      - '443:8443'
+    environment:
+      - MEDIAWIKI_DATABASE_HOST=mariadb
+      - MEDIAWIKI_DATABASE_PORT_NUMBER=3306
+      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
+      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MEDIAWIKI_HOST=localhost:8080
+    volumes:
+      - ./mediawiki-data:/bitnami/mediawiki
+            #- 'mediawiki_data:/bitnami/mediawiki'
+    depends_on:
+      - mariadb
+        #volumes:
+        #  mariadb_data:
+        #    driver: local
+        #  mediawiki_data:
+        #    driver: local
