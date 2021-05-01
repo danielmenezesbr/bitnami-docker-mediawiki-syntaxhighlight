@@ -10,8 +10,8 @@ RUN rm SyntaxHighlight_GeSHi-REL1_35-0e4cce6.tar.gz
 RUN cd /bitnami/mediawiki/extensions/SyntaxHighlight_GeSHi && composer install --no-dev
 RUN chmod a+x /bitnami/mediawiki/extensions/SyntaxHighlight_GeSHi/pygments/pygmentize
 RUN mkdir /docker-entrypoint-init.d
-COPY mycustom.sh /docker-entrypoint-init.d/mycustom.sh
-RUN chmod a+x /docker-entrypoint-init.d/mycustom.sh
+COPY SyntaxHighlight-setup.sh /docker-entrypoint-init.d/SyntaxHighlight-setup.sh
+RUN chmod a+x /docker-entrypoint-init.d/SyntaxHighlight-setup.sh
 ## Revert to the original non-root user
 USER 1001
 
