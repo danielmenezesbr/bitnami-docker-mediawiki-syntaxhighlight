@@ -2,7 +2,7 @@
 
 ## Intro 
 
-This repository creates a MediaWiki image and installs SyntaxHighlight extension. This image is based on Bitnami Docker Image for MediaWiki.
+This repository creates a MediaWiki image and installs [SyntaxHighlight](https://www.mediawiki.org/wiki/Extension:SyntaxHighlight) extension. This image is based on [Bitnami Docker Image for MediaWiki](https://github.com/bitnami/bitnami-docker-mediawiki).
 
 Requirements:
   - Git
