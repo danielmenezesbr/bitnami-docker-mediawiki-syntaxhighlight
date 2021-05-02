@@ -2,14 +2,15 @@ version: '2'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
+    container_name: mariadb_wiki
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_mediawiki
       - MARIADB_DATABASE=bitnami_mediawiki
     volumes:
       - ./mariadb-data:/bitnami/mariadb
-        #      - 'mariadb_data:/bitnami/mariadb'
-  mediawiki2:
+      #- 'mariadb_data:/bitnami/mariadb'
+  mediawiki:
     image: docker.io/bitnami/mediawiki:1.35.1-custom
     build: .
     container_name: wiki
@@ -25,11 +26,11 @@ services:
       - MEDIAWIKI_HOST=localhost:8080
     volumes:
       - ./mediawiki-data:/bitnami/mediawiki
-            #- 'mediawiki_data:/bitnami/mediawiki'
+      #- 'mediawiki_data:/bitnami/mediawiki'
     depends_on:
       - mariadb
-        #volumes:
-        #  mariadb_data:
-        #    driver: local
-        #  mediawiki_data:
-        #    driver: local
+#volumes:
+#  mariadb_data:
+#    driver: local
+#  mediawiki_data:
+#    driver: local
